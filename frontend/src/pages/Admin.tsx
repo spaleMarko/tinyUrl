@@ -12,7 +12,7 @@ function Admin() {
   useEffect(() => {
     const getPopularDomains = async () => {
       const response = await axios.get(
-        'http://localhost:5000/admin/most-popular-domain'
+        'http://localhost:5000/api/admin/most-popular-domains'
       );
 
       setPopularDomains(response.data.mostPopularDomains);

@@ -8,11 +8,13 @@ function Home() {
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await axios.post('http://localhost:5000/shorten', {
+    const response = await axios.post('http://localhost:5000/api/shorten', {
       longUrl,
     });
 
-    setShortUrl(`http://localhost:5000/${response.data.createdUrl.shortId}`);
+    setShortUrl(
+      `http://localhost:5000/api/${response.data.createdUrl.shortId}`
+    );
 
     setLongUrl('');
   };

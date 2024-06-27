@@ -4,6 +4,9 @@ import shortid from 'shortid';
 // Models
 import UrlModel from '../models/urlModel';
 
+// @desc Create shortId and save to DB
+// @route POST /api/shorten
+// @access Public
 const createShortenUrl = async (req: Request, res: Response) => {
   const { longUrl } = req.body;
   const shortId = shortid.generate();
@@ -15,6 +18,9 @@ const createShortenUrl = async (req: Request, res: Response) => {
   res.status(201).json({ createdUrl });
 };
 
+// @desc Redirect to long URL
+// @route GET /api/:shortId
+// @access Public
 const redirectUrl = async (req: Request, res: Response) => {
   const { shortId } = req.params;
 
@@ -30,6 +36,9 @@ const redirectUrl = async (req: Request, res: Response) => {
   }
 };
 
+// @desc Show most popular domains in last 24h
+// @route POST /api/admin/most-popular-domains
+// @access Public
 const getMostPopularDomansForLastDay = async (req: Request, res: Response) => {
   try {
     const lastDay = new Date();

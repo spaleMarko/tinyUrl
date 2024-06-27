@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 
 const connectDB = async () => {
+  const MONGO_URL = process.env.MONGO_URL as string;
   try {
-    const conn = await mongoose.connect(
-      'mongodb+srv://spalemarko1991:martina@cluster0.8bzdvhx.mongodb.net/tinyurl?retryWrites=true&w=majority&appName=Cluster0'
-    );
+    const conn = await mongoose.connect(MONGO_URL);
 
     console.log(`Mongo DB connected : ${conn.connection.port}`);
   } catch (error) {

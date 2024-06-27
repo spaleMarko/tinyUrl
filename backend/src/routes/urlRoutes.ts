@@ -11,6 +11,6 @@ const router = Router();
 
 router.post('/shorten', createShortenUrl);
 router.get('/:shortId', redirectUrl);
-router.get('/admin/most-popular-domain', getMostPopularDomansForLastDay);
+router.get('/admin/most-popular-domains', getMostPopularDomansForLastDay);
 
 export default router;
