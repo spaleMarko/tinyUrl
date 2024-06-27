@@ -31,7 +31,27 @@ const redirectUrl = async (req: Request, res: Response) => {
 };
 
 const getMostPopularDomansForLastDay = async (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Most popular domains' });
+  try {
+    const lastDay = new Date();
+    lastDay.setDate(lastDay.getDate() - 1);
+
+    const mostPopularDomains = await UrlModel.aggregate([
+      { $match: { createdAt: { $gte: lastDay } } },
+      {
+        $group: {
+          _id: {
+            $substr: ['$longUrl', 0, { $indexOfCP: ['$longUrl', '/', 8] }],
+          },
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { count: -1 } },
+      { $limit: 10 },
+    ]);
+    res.status(200).json({ mostPopularDomains });
+  } catch (error) {
+    res.status(500).json({ message: 'Error while fetching data', error });
+  }
 };
 
 export { createShortenUrl, redirectUrl, getMostPopularDomansForLastDay };
