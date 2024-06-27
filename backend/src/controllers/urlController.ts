@@ -16,7 +16,18 @@ const createShortenUrl = async (req: Request, res: Response) => {
 };
 
 const redirectUrl = async (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Redirect URL' });
+  const { shortId } = req.params;
+
+  const findUrl = await UrlModel.findOne({ shortId });
+
+  if (findUrl) {
+    findUrl.numOfClicks += 1;
+    await findUrl.save();
+
+    res.redirect(findUrl.longUrl);
+  } else {
+    res.status(404).json({ message: 'Url not found' });
+  }
 };
 
 const getMostPopularDomansForLastDay = async (req: Request, res: Response) => {
