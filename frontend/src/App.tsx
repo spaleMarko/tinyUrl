@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 function App() {
   const [longUrl, setLongUrl] = useState('');
@@ -22,12 +23,12 @@ function App() {
       <nav>
         <ul>
           <li>
-            <a href='/' className='active'>
-              Home
-            </a>
+            <NavLink to='/'>Home</NavLink>
           </li>
           <li>
-            <a href='/admin/most-popular-domains'>Most popular domains</a>
+            <NavLink to='/admin/most-popular-domains'>
+              Most popular domains
+            </NavLink>
           </li>
         </ul>
       </nav>
@@ -47,9 +48,12 @@ function App() {
       </form>
 
       {shortUrl && (
-        <p>
-          Short URL: <a href={shortUrl}>{shortUrl}</a>
-        </p>
+        <div className='short-url-container'>
+          <p>Short URL:</p>
+          <a href={shortUrl} className='short-url-link'>
+            {shortUrl}
+          </a>
+        </div>
       )}
     </div>
   );
