@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
 
 function Home() {
   const [longUrl, setLongUrl] = useState('');
@@ -19,20 +18,7 @@ function Home() {
   };
 
   return (
-    <div className='container'>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to='/'>Home</NavLink>
-          </li>
-          <li>
-            <NavLink to='/admin/most-popular-domains'>
-              Most popular domains
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-
+    <>
       <h1>Tiny Url</h1>
 
       <form onSubmit={submitHandler}>
@@ -55,7 +41,7 @@ function Home() {
           </a>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

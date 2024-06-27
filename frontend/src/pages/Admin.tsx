@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
 
 interface PopularDomain {
   _id: string;
@@ -23,20 +22,7 @@ function Admin() {
   }, []);
 
   return (
-    <div className='container'>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to='/'>Home</NavLink>
-          </li>
-          <li>
-            <NavLink to='/admin/most-popular-domains'>
-              Most popular domains
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-
+    <>
       <h1>Admin Dashboard</h1>
       <h2>The most popular domains in the last 24 hours</h2>
 
@@ -52,7 +38,7 @@ function Admin() {
             </li>
           ))}
       </ul>
-    </div>
+    </>
   );
 }
 
