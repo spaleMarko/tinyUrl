@@ -27,13 +27,13 @@ cd backend
 cp example.env .env
 ```
 
-#### Install backend dependency
+#### Install Backend dependency
 
 ```
 npm install
 ```
 
-#### Start backend
+#### Start Backend
 
 ```
 tsc
