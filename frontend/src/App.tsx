@@ -1,24 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [longUrl, setLongUrl] = useState('');
+  const [shortUrl, setShortUrl] = useState('');
+
+  const submitHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const response = await axios.post('http://localhost:5000/shorten', {
+      longUrl,
+    });
+
+    setShortUrl(`http://localhost:5000/${response.data.createdUrl.shortId}`);
+
+    setLongUrl('');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className='container'>
+      <nav>
+        <ul>
+          <li>
+            <a href='/' className='active'>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href='/admin/most-popular-domains'>Most popular domains</a>
+          </li>
+        </ul>
+      </nav>
+
+      <h1>Tiny Url</h1>
+
+      <form onSubmit={submitHandler}>
+        <input
+          type='url'
+          value={longUrl}
+          onChange={(e) => setLongUrl(e.target.value)}
+          placeholder='Enter Url'
+          required
+        />
+
+        <button type='submit'>Submit</button>
+      </form>
+
+      {shortUrl && (
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Short URL: <a href={shortUrl}>{shortUrl}</a>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      )}
     </div>
   );
 }
